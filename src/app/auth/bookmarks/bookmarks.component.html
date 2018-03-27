@@ -1,0 +1,71 @@
+<!--<div class="b-bookmark" *ngFor="let bookmark of bookmarks">-->
+<!--{{ bookmark.title }}-->
+
+<!--</div>-->
+<div class="b-table-container mat-elevation-z8">
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
+    </mat-form-field>
+  </div>
+
+  <mat-table #table [dataSource]="dataSource" matSort>
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Id.</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}}</mat-cell>
+    </ng-container>
+
+    <!-- Title Column -->
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Título</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a href="#">{{element.title}}</a>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Description Column -->
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef> Descripción</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.description}}</mat-cell>
+    </ng-container>
+
+    <!-- Created Column -->
+    <ng-container matColumnDef="created">
+      <mat-header-cell *matHeaderCellDef> Creado</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.created | date }}</mat-cell>
+    </ng-container>
+
+    <!-- <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> Acciones</mat-header-cell>
+
+      <mat-cell *matCellDef="let element">
+        <button mat-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="openBookmarkURL(element, $event)">Open</button>
+          <button mat-menu-item (click)="editBookmark(element)">Edit</button>
+        </mat-menu>
+      </mat-cell>
+    </ng-container> -->
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+
+  </mat-table>
+
+  <!-- <mat-paginator [length]="length"
+                 [pageSize]="pageSize"
+                 [pageSizeOptions]="pageSizeOptions"
+                 (page)="pageEvent = $event">
+  </mat-paginator> -->
+
+  <!--<div *ngIf="pageEvent">-->
+  <!--<h5>Page Change Event Properties</h5>-->
+  <!--<div>List length: {{pageEvent.length}}</div>-->
+  <!--<div>Page size: {{pageEvent.pageSize}}</div>-->
+  <!--<div>Page index: {{pageEvent.pageIndex}}</div>-->
+  <!--</div>-->
+</div>
