@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule,MatTableModule,MatMenuModule,MatPaginatorModule,MatSortModule,MatIconModule } from '@angular/material';
+import { MatInputModule,MatTableModule,MatMenuModule,MatPaginatorModule,MatSortModule,MatIconModule,MatDialogModule } from '@angular/material';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
@@ -26,6 +26,7 @@ import { TokenInterceptor } from './auth/interceptors/token.interceptor';
 import { BookmarksComponent } from './auth/bookmarks/bookmarks.component';
 import { BookMarksResponse } from './auth/bookmarks/models/bookmarks-response.model';
 import { WindowReferenceService } from './common/services/window-reference.service';
+import { EditBookmarkComponent } from './auth/bookmarks/edit-bookmark/edit-bookmark.component';
 
 @NgModule({
   declarations: [
@@ -34,8 +35,12 @@ import { WindowReferenceService } from './common/services/window-reference.servi
     LoginComponent,
     HomeComponent,
     NotFoundComponent,
-    BookmarksComponent
+    BookmarksComponent,
+    EditBookmarkComponent
     
+  ],
+  entryComponents:[
+    EditBookmarkComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +58,8 @@ import { WindowReferenceService } from './common/services/window-reference.servi
     MatInputModule,
     MatSortModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
   ],
   providers: [PublicGuard,AuthGuard,AuthenticationService,
     BookmarksService,

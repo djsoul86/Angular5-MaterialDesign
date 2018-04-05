@@ -2,8 +2,9 @@ import { Component, OnInit,ViewChild } from '@angular/core';
 import { BookmarksService } from './services/bookmarks.service';
 import { BookMark } from './models/bookmark.model';
 import { BookMarksResponse } from './models/bookmarks-response.model';
-import { MatTableDataSource,MatPaginator,MatSort } from '@angular/material';
+import { MatTableDataSource,MatPaginator,MatSort, MatDialog } from '@angular/material';
 import { WindowReferenceService } from '../../common/services/window-reference.service';
+import { EditBookmarkComponent } from './edit-bookmark/edit-bookmark.component';
 
 
 @Component({
@@ -30,7 +31,9 @@ export class BookmarksComponent implements OnInit {
   }
 
 
-  constructor(public bookmarksService:BookmarksService,public windowReference:WindowReferenceService) { 
+  constructor(public bookmarksService:BookmarksService
+    ,public windowReference:WindowReferenceService
+    ,public dialog:MatDialog) { 
     this.nativeWindow = this.windowReference.getNativeWindow();
   }
 
@@ -39,6 +42,24 @@ export class BookmarksComponent implements OnInit {
     event.preventDefault();
     this.nativeWindow.open(bookmark.url);
     //window.location.href = bookmark.url;
+  }
+
+  editBookmark(bookmark:BookMark,event:Event){
+    this.openDialogToEditBookmark(bookmark);
+  }
+
+  openDialogToEditBookmark(bookmark:BookMark){
+    const dialogRef = this.dialog.open(EditBookmarkComponent,
+      {
+        data:bookmark,
+        height:'400px',
+        width:'600px'
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(result);
+      });
+
   }
 
 

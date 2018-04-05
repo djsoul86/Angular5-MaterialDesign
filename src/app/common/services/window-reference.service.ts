@@ -6,6 +6,7 @@ export class WindowReferenceService {
   constructor() { }
 
   getNativeWindow(){
+    
     return window;
   }
 
