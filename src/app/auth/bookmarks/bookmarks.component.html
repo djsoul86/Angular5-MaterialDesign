@@ -26,15 +26,31 @@
 
     <!-- Description Column -->
     <ng-container matColumnDef="description">
-      <mat-header-cell *matHeaderCellDef> Descripción</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Descripción</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.description}}</mat-cell>
     </ng-container>
 
     <!-- Created Column -->
     <ng-container matColumnDef="created">
-      <mat-header-cell *matHeaderCellDef> Creado</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.created | date }}</mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Creado</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.created}}</mat-cell>
     </ng-container>
+
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="openBookmarkURL(element,$event)">
+                Abrir
+              </button>
+            </mat-menu>
+      </mat-cell>
+    </ng-container>
+
 
     <!-- <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef> Acciones</mat-header-cell>
@@ -56,16 +72,16 @@
 
   </mat-table>
 
-  <!-- <mat-paginator [length]="length"
-                 [pageSize]="pageSize"
-                 [pageSizeOptions]="pageSizeOptions"
-                 (page)="pageEvent = $event">
-  </mat-paginator> -->
+  <mat-paginator [length]="length"
+              [pageSize]="3"
+              [pageSizeOptions]="pageSizeOptions"
+              (page)="pageEvent = $event">
+</mat-paginator>
 
-  <!--<div *ngIf="pageEvent">-->
-  <!--<h5>Page Change Event Properties</h5>-->
-  <!--<div>List length: {{pageEvent.length}}</div>-->
-  <!--<div>Page size: {{pageEvent.pageSize}}</div>-->
-  <!--<div>Page index: {{pageEvent.pageIndex}}</div>-->
-  <!--</div>-->
+<!-- <div *ngIf="pageEvent">
+  <h5>Page Change Event Properties</h5>
+  <div>List length: {{pageEvent.length}}</div>
+  <div>Page size: {{pageEvent.pageSize}}</div>
+  <div>Page index: {{pageEvent.pageIndex}}</div>
 </div>
+</div> -->

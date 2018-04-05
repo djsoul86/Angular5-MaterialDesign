@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule,MatTableModule } from '@angular/material';
+import { MatInputModule,MatTableModule,MatMenuModule,MatPaginatorModule,MatSortModule,MatIconModule } from '@angular/material';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
@@ -20,9 +20,12 @@ import { AuthGuard } from './common/guards/auth.guard';
 import { AuthenticationService } from './common/services/authentication.service';
 import { Ng2Webstorage } from 'ngx-webstorage';
 import { BookmarksService} from './auth/bookmarks/services/bookmarks.service';
+// import { BookMark } from './auth/bookmarks/models/bookmark.model';
 
 import { TokenInterceptor } from './auth/interceptors/token.interceptor';
 import { BookmarksComponent } from './auth/bookmarks/bookmarks.component';
+import { BookMarksResponse } from './auth/bookmarks/models/bookmarks-response.model';
+import { WindowReferenceService } from './common/services/window-reference.service';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,7 @@ import { BookmarksComponent } from './auth/bookmarks/bookmarks.component';
     HomeComponent,
     NotFoundComponent,
     BookmarksComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -40,15 +44,20 @@ import { BookmarksComponent } from './auth/bookmarks/bookmarks.component';
     BrowserAnimationsModule,
     MatButtonModule,
     MatTableModule,
+    MatPaginatorModule,
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     HttpClientModule,
     Ng2Webstorage,
-    MatInputModule
+    MatInputModule,
+    MatSortModule,
+    MatMenuModule,
+    MatIconModule
   ],
   providers: [PublicGuard,AuthGuard,AuthenticationService,
     BookmarksService,
+    WindowReferenceService,
     {provide:HTTP_INTERCEPTORS,useClass:TokenInterceptor,multi:true}
   ],
   bootstrap: [AppComponent]
